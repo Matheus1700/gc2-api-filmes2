@@ -1,0 +1,19 @@
+name: meu-primeiro-workflow
+run-name: ${{ github.actor }} esta aprendendo Github actions
+on: [push]
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonando o repositorio e trocando para a branch correta
+        uses: actions/checkout@v4
+      - name: Instalando o node versao 21
+        uses: actions/setup-node@v3
+        with:
+          node-version: 21
+      - name: Instalando as dependencias de desenvolvimento
+        run: npm i -D
+      - name: Executando os testes
+        run: npm run test
+      - name: Executando os testes de cobertura
+        run: npm run test:coverage
